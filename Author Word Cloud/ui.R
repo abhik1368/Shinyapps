@@ -25,12 +25,15 @@ shinyUI(pageWithSidebar(
     br(),
     
     # Drop-down input for the color scheme selection (RColorBrewer package for colors)
-    selectInput("colSel", "Select a color scheme:", c("Accent" = "Accent", "Dark" = "Dark2", "Pastel 1" = "Pastel1", "Pastel 2" = "Pastel2", "Paired" = "Paired", "One" = "Set1", "Two" = "Set2", "Three" = "Set3"), selected = "Accent")
+    selectInput("colSel", "Select a color scheme:", c("Accent" = "Accent", "Dark" = "Dark2", "Pastel 1" = "Pastel1", "Pastel 2" = "Pastel2", "Paired" = "Paired", "One" = "Set1", "Two" = "Set2", "Three" = "Set3"), selected = "Accent"),
+    downloadButton(
+      outputId = "downloadimage", 
+      label    = "Download Image")
     
   ),
   
   mainPanel(
     #Plot the wordcloud here
-    plotOutput("plot1", "800px", "600px")      
-  )
+    plotOutput("plot1", "800px", "600px")
+    )
 ))

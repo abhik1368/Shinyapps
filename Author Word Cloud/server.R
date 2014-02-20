@@ -120,9 +120,21 @@ shinyServer(function(input, output) {
     }
     
     # Get inputs, download abstracts, and create a corresponding wordcloud 
+    
     numCol <- colNum(input$colSel)
     plotWC(getAbstracts(input$aName, input$yL, input$yH, input$nR), numCol, input$colSel)
     
+    # Include a downloadable file of the plot in the output list.
+    output$downloadimage <- downloadHandler(
+      filename = "shinyPlot.pdf",
+      # The argument content below takes filename as a function
+      # and returns what's printed to it.
+      content = function(con) {
+        pdf(con)
+        print(plotWC(getAbstracts(input$aName, input$yL, input$yH, input$nR), numCol, input$colSel))
+        dev.off(which=dev.cur())
+      }
+    )
   })
   
 })
